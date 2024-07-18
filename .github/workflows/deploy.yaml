@@ -1,0 +1,38 @@
+name: Deploy CloudFormation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Assume IAM role
+      id: assume-role
+      run: |
+        ROLE_SESSION_NAME=github-actions-$(date +%s)
+        CREDS=$(aws sts assume-role --role-arn ${{ secrets.AWS_ROLE_ARN }} --role-session-name $ROLE_SESSION_NAME)
+        echo "AWS_ACCESS_KEY_ID=$(echo $CREDS | jq -r '.Credentials.AccessKeyId')" >> $GITHUB_ENV
+        echo "AWS_SECRET_ACCESS_KEY=$(echo $CREDS | jq -r '.Credentials.SecretAccessKey')" >> $GITHUB_ENV
+        echo "AWS_SESSION_TOKEN=$(echo $CREDS | jq -r '.Credentials.SessionToken')" >> $GITHUB_ENV
+
+    - name: Deploy CloudFormation stack
+      run: |
+        aws cloudformation deploy \
+          --template-file ./template.yaml \
+          --stack-name your-stack-name \
+          --capabilities CAPABILITY_NAMED_IAM \
+          --parameter-overrides Key1=Value1 Key2=Value2
