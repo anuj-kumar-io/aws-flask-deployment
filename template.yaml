@@ -6,6 +6,11 @@ Resources:
     Properties:
       BucketName: 'prod-deployment-000000000001'
 
+  MyS3Bucket2:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: 'prod-deployment-000000000002'
+
 Outputs:
   BucketName:
     Value: !Ref MyS3Bucket
