@@ -1,0 +1,27 @@
+name: Deploy CloudFormation Stack
+
+on:
+  push:
+    branches: [ main ]  # Trigger on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3  # Checkout code from GitHub repository
+      - name: Use AWS credentials  # Use your IAM role credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-1  # Update with your desired region
+      - name: Install AWS CLI  # Install the AWS CLI
+        run: |
+          curl -sL https://awscli.amazonaws.com/v2/install-awscli.sh | bash -
+      - name: Deploy CloudFormation stack
+        run: |
+          aws cloudformation deploy \
+            --template-file [template_file_location] \
+            --stack-name [stack_name] \
+            --capabilities [capabilities]  # Optional capabilities (IAM, Auto Scaling)
+
