@@ -21,7 +21,5 @@ jobs:
       - name: Deploy CloudFormation stack
         run: |
           aws cloudformation deploy \
-            --template-file [template_file_location] \
-            --stack-name [stack_name] \
-            --capabilities [capabilities]  # Optional capabilities (IAM, Auto Scaling)
-
+            --template-file ./template.yaml \
+            --stack-name aws-flask-web-deployment-1 

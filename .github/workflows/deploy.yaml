@@ -33,6 +33,5 @@ jobs:
       run: |
         aws cloudformation deploy \
           --template-file ./template.yaml \
-          --stack-name your-stack-name \
+          --stack-name aws-flask-web-deployment-1 \
           --capabilities CAPABILITY_NAMED_IAM \
-          --parameter-overrides Key1=Value1 Key2=Value2
