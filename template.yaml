@@ -1,17 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
 Resources:
-  MyS3Bucket:
+  MyS3Bucket3:
     Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: 'prod-deployment-000000000003'
 
-  MyS3Bucket2:
-    Type: 'AWS::S3::Bucket'
-    Properties:
-      BucketName: 'prod-deployment-000000000002'
-
 Outputs:
   BucketName:
-    Value: !Ref MyS3Bucket
+    Value: !Ref MyS3Bucket3
     Description: The name of the S3 buckets
