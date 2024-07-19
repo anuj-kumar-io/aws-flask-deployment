@@ -1,9 +1,9 @@
-name: Deploy CloudFormation
+name: Deploy to AWS CloudFormation
 
 on:
   push:
     branches:
-      - main
+      - main  # or any branch you want to trigger the deployment
 
 jobs:
   deploy:
@@ -14,24 +14,14 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
-
-    - name: Assume IAM role
-      id: assume-role
-      run: |
-        ROLE_SESSION_NAME=github-actions-$(date +%s)
-        CREDS=$(aws sts assume-role --role-arn ${{ secrets.AWS_ROLE_ARN }} --role-session-name $ROLE_SESSION_NAME)
-        echo "AWS_ACCESS_KEY_ID=$(echo $CREDS | jq -r '.Credentials.AccessKeyId')" >> $GITHUB_ENV
-        echo "AWS_SECRET_ACCESS_KEY=$(echo $CREDS | jq -r '.Credentials.SecretAccessKey')" >> $GITHUB_ENV
-        echo "AWS_SESSION_TOKEN=$(echo $CREDS | jq -r '.Credentials.SessionToken')" >> $GITHUB_ENV
+        aws-region: us-west-1  # specify your AWS region
 
     - name: Deploy CloudFormation stack
       run: |
         aws cloudformation deploy \
           --template-file ./template.yaml \
-          --stack-name aws-flask-web-deployment-1 \
-          --capabilities CAPABILITY_NAMED_IAM \
+          --stack-name flask-web-api \
