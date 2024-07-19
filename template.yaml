@@ -13,7 +13,7 @@ Resources:
     Properties:
       BucketName: 'prod-deployment-000000000004'
 
-Outputs:
-  BucketName:
-    Value: !Ref MyS3Bucket3
-    Description: The name of the S3 buckets
+# Outputs:
+#   BucketName:
+#     Value: !Ref MyS3Bucket3
+#     Description: The name of the S3 buckets
