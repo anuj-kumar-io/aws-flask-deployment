@@ -4,12 +4,12 @@ Resources:
   MyS3Bucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: 'prod-deployment-000000000001'
+      BucketName: 'prod-deployment-000000000003'
 
   MyS3Bucket2:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: 'prod-deployment-000000000002'
+      BucketName: 'prod-deployment-000000000004'
 
 Outputs:
   BucketName:
