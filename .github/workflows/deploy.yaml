@@ -3,7 +3,7 @@ name: Deploy to AWS CloudFormation
 on:
   push:
     branches:
-      - main  # Or any branch you want to trigger the deployment
+      - main  # any branch you want to trigger the deployment
 
 jobs:
   deploy:
