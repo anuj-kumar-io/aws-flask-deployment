@@ -11,4 +11,4 @@ Resources:
         Status: Enabled
 
 Outputs:
-  BucketName
+  MainS3Bucket
