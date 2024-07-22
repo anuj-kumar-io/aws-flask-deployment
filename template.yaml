@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create an S3 bucket
+
+Resources:
+  MainS3Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: 'Testing-bucket-main'
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Enabled
+
+Outputs:
+  BucketName
