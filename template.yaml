@@ -5,4 +5,4 @@ Resources:
   MainS3Bucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Sub 'testing-bucket-Region-01'
+      BucketName: 'testing-bucket-Region-01'
