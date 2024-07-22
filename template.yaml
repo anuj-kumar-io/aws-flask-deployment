@@ -6,6 +6,3 @@ Resources:
     Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: 'Testing-bucket-main'
-      AccessControl: Private
-      VersioningConfiguration:
-        Status: Enabled
