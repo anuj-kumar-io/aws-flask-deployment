@@ -1,8 +1,17 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: CloudFormation template to create an S3 bucket
+Description: Sample CloudFormation template
 
 Resources:
-  MainS3Bucket:
-    Type: 'AWS::S3::Bucket'
+  MyS3Bucket01:
+    Type: AWS::S3::Bucket
     Properties:
-      BucketName: 'testing-bucket-region-01'
+      BucketName: my-unique-bucket-name-000001
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Enabled
+
+
+Outputs:
+  BucketName:
+    Description: Name of the sample Amazon S3 bucket
+    Value: !Ref MyS3Bucket
