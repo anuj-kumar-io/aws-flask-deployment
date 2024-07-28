@@ -253,13 +253,26 @@ Resources:
         - Key: Name
           Value: MyECSClusterSecurityGroup
 
+  # Create an ECS task definition
+  MyECSTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: MyECSTaskDefinition
+      ContainerDefinitions:
+        - Name: my-container
+          Image: amazon/amazon-ecs-sample
+          Essential: true
+          Memory: 512
+          PortMappings:
+            - ContainerPort: 80
+
   # Create an ECS service
   MyECSService:
     Type: AWS::ECS::Service
     Properties:
       Cluster: !Ref MyECSCluster
       ServiceName: MyECSService
-      # TaskDefinition: !Ref MyECSTaskDefinition
+      TaskDefinition: !Ref MyECSTaskDefinition
       DesiredCount: 1
       LaunchType: EC2
       NetworkConfiguration:
