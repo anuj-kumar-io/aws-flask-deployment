@@ -14,4 +14,4 @@ Resources:
 Outputs:
   BucketName:
     Description: Name of the sample Amazon S3 bucket
-    Value: !Ref MyS3Bucket
+    Value: !Ref MyS3Bucket01
