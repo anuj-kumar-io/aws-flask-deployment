@@ -24,7 +24,7 @@ jobs:
 
     - name: Lint CloudFormation template
       run: |
-        cfn-lint template.yaml
+        cfn-lint template.yaml --config .cfnlintrc
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
