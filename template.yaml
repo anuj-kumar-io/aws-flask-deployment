@@ -257,7 +257,7 @@ Resources:
   MyECSTaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      NetworkMode: none
+      NetworkMode: awsvpc
       Family: MyECSTaskDefinition
       ContainerDefinitions:
         - Name: my-container
