@@ -13,6 +13,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # Specify the Python version to use
+
+    - name: Install cfn-lint
+      run: |
+        pip install cfn-lint
+
+    - name: Lint CloudFormation template
+      run: |
+        cfn-lint template.yaml
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
